@@ -1,0 +1,18 @@
+{% if not user.is_authenticated %}
+  <div>You're not logged in</div>
+{% else %}
+  <div>Welcome {{ user.username }}</div>
+  {% if user.is_staff %}
+    <div>Create vacancy:</div>
+    <form action="/vacancy/new" method="post">{% csrf_token %}
+      <input name="description">
+      <input type="submit" value="Send">
+    </form>
+  {% else %}
+    <div>Create resume:</div>
+    <form action="/resume/new" method="post">{% csrf_token %}
+      <input name="description">
+      <input type="submit" value="Send">
+    </form>
+  {% endif %}
+{% endif %}
